@@ -1,4 +1,4 @@
-// Copyright 2021 Cold Symmetry. All rights reserved.
+// Copyright 2021 Cold Symmetry. MIT License
 
 #include "K2Node_SwitchClass.h"
 
@@ -127,6 +127,7 @@ public:
 					ClassTerm->bIsLiteral = true;
 
 					// TODO: Handle KCST_DynamicCast vs. Interface/Meta like DynamicCastHandler.cpp
+
 					// Cast to the appropriate class
 					FBlueprintCompiledStatement& CastStatement = Context.AppendStatementForNode(Node);
 					CastStatement.Type = KCST_DynamicCast;
@@ -300,14 +301,17 @@ void UK2Node_SwitchClass::CreateSingleCasePins(const TSubclassOf<class UObject>&
 	UEdGraphPin* CastPin;
 
 	const FString CastResultPinName = UEdGraphSchema_K2::PN_CastedValuePrefix + PinClass->GetDisplayNameText().ToString();
-	if (PinClass->IsChildOf(UInterface::StaticClass()))
-	{
-		CastPin = CreatePin(EGPD_Output, UEdGraphSchema_K2::PC_Interface, *PinClass, *CastResultPinName);
-	}
-	else
-	{
-		CastPin = CreatePin(EGPD_Output, UEdGraphSchema_K2::PC_Object, *PinClass, *CastResultPinName);
-	}
+	// TODO: DynamicCast has some special logic for Interface vs Class. But probably need to adjust the compile too,
+	// which is more complex.
+	CastPin = CreatePin(EGPD_Output, UEdGraphSchema_K2::PC_Object, *PinClass, *CastResultPinName);
+// 	if (PinClass->IsChildOf(UInterface::StaticClass()))
+// 	{
+// 		CastPin = CreatePin(EGPD_Output, UEdGraphSchema_K2::PC_Interface, *PinClass, *CastResultPinName);
+// 	}
+// 	else
+// 	{
+// 		CastPin = CreatePin(EGPD_Output, UEdGraphSchema_K2::PC_Object, *PinClass, *CastResultPinName);
+// 	}
 
 	// Mild hack: Instead of getting rid of the pins, we just break and hide them, so the compile is the same.
 	CastPin->bHidden = !bHasCastPins;

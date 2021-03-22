@@ -1,4 +1,4 @@
-// Copyright 2021 Cold Symmetry. All rights reserved.
+// Copyright 2021 Cold Symmetry. MIT License
 
 #include "UE4UtilsEditor.h"
 
