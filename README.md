@@ -3,6 +3,7 @@ Useful utilities for Unreal Engine 4.26+. Free to use, modify, and redistribute 
 
 ## K2Node_SwitchClass
 Blueprint node to attempt to Cast an object to a selection of classes. The first one that succeeds will execute an execute pin, and allow access to the Cast result.
+
 <img width="708" alt="Activatable" src="https://user-images.githubusercontent.com/81110306/113037495-4a97c580-914a-11eb-8cf1-8da3034481c3.png">
 
 The default output execution pin, as well as the cast result pins, can each be hidden if desired.
