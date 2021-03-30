@@ -48,7 +48,7 @@ public:
 		Context.NetMap.Add(Net, Term);
 	}
 	
-	// This function is a copy, up to the rewrite o the for PinIt loop.
+	// This function is a copy, up to the rewrite of the for (auto PinIt... loop.
 	virtual void Compile(FKismetFunctionContext& Context, UEdGraphNode* Node) override
 	{
 		UK2Node_SwitchClass* SwitchNode = CastChecked<UK2Node_SwitchClass>(Node);
